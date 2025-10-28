@@ -1,3 +1,4 @@
+/* ========== Variables de Color ========== */
 :root {
     --eco-primary: #10b981;
     --eco-dark: #047857;
@@ -5,12 +6,52 @@
     --eco-bg-dark: #1e293b;
 }
 
+/* ========== Light Theme Variables ========== */
+body[data-theme="light"] {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;
+}
+
+/* ========== Dark Theme Variables ========== */
+body[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --card-bg: #1e293b;
+    --border-color: #334155;
+}
+
+/* ========== Estilos Generales ========== */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Logo Styles */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+}
+
+.lead {
+    color: var(--text-secondary) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* ========== Logo Styles ========== */
 .logo-img {
     width: 40px;
     height: 40px;
@@ -23,7 +64,44 @@ body {
     object-fit: contain;
 }
 
-/* Hero Section */
+/* ========== Navbar Styles ========== */
+.navbar {
+    background-color: var(--card-bg) !important;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .nav-link {
+    color: var(--text-primary) !important;
+}
+
+.navbar .navbar-brand span {
+    color: var(--eco-primary) !important;
+}
+
+/* ========== Theme Toggle Button ========== */
+#themeToggle {
+    border-color: var(--border-color);
+    background-color: var(--bg-secondary);
+    transition: all 0.3s ease;
+}
+
+#themeToggle:hover {
+    background-color: var(--eco-primary);
+    border-color: var(--eco-primary);
+    transform: scale(1.1);
+}
+
+#themeIcon {
+    font-size: 1.2rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+#themeToggle:hover #themeIcon {
+    transform: rotate(20deg);
+}
+
+/* ========== Hero Section ========== */
 .hero-section {
     background: linear-gradient(135deg, var(--eco-dark) 0%, var(--eco-primary) 100%);
     color: white;
@@ -84,7 +162,7 @@ body {
     background: var(--eco-light);
 }
 
-/* Carousel */
+/* ========== Carousel ========== */
 .carousel-container {
     max-width: 400px;
     margin: 0 auto;
@@ -147,20 +225,37 @@ body {
     background-color: white;
 }
 
-/* Feature Cards */
+/* ========== Feature Cards ========== */
 .feature-card {
-    background: white;
+    background: var(--card-bg);
     border-radius: 20px;
     padding: 40px 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     transition: all 0.3s ease;
-    border: none;
+    border: 1px solid var(--border-color);
     height: 100%;
+}
+
+body[data-theme="dark"] .feature-card {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .feature-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 50px rgba(16, 185, 129, 0.2);
+}
+
+body[data-theme="dark"] .feature-card:hover {
+    box-shadow: 0 20px 50px rgba(16, 185, 129, 0.4);
+}
+
+.feature-card h3,
+.feature-card p {
+    color: var(--text-primary);
+}
+
+.feature-card .text-muted {
+    color: var(--text-muted) !important;
 }
 
 .feature-icon {
@@ -176,7 +271,7 @@ body {
     box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
 }
 
-/* Stats Section */
+/* ========== Stats Section ========== */
 .stats-section {
     background: var(--eco-bg-dark);
     color: white;
@@ -195,7 +290,7 @@ body {
     margin-bottom: 10px;
 }
 
-/* Challenge Cards */
+/* ========== Challenge Cards ========== */
 .challenge-card {
     background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
     border-radius: 20px;
@@ -205,9 +300,27 @@ body {
     transition: all 0.3s ease;
 }
 
+body[data-theme="dark"] .challenge-card {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    border-color: var(--eco-dark);
+}
+
 .challenge-card:hover {
     transform: translateX(10px);
     border-color: var(--eco-primary);
+}
+
+.challenge-card h4,
+.challenge-card p {
+    color: var(--text-primary);
+}
+
+body[data-theme="dark"] .challenge-card h4 {
+    color: var(--text-primary);
+}
+
+body[data-theme="dark"] .challenge-card p {
+    color: var(--text-secondary) !important;
 }
 
 .difficulty-badge {
@@ -232,13 +345,87 @@ body {
     color: #991b1b; 
 }
 
-/* Impact Section */
+/* ========== Impact Section ========== */
 .impact-section {
-    background: linear-gradient(to bottom, white, var(--eco-light));
+    background: linear-gradient(to bottom, var(--bg-primary), var(--eco-light));
     padding: 80px 0;
 }
 
-/* CTA Section */
+body[data-theme="dark"] .impact-section {
+    background: linear-gradient(to bottom, var(--bg-primary), #1e3a32);
+}
+
+.impact-section .bg-white {
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--border-color);
+}
+
+.impact-section h2,
+.impact-section h3,
+.impact-section h5 {
+    color: var(--text-primary);
+}
+
+.impact-section .lead,
+.impact-section p {
+    color: var(--text-secondary) !important;
+}
+
+.impact-section .bg-light {
+    background-color: var(--bg-secondary) !important;
+}
+
+.impact-section .impact-card {
+    background-color: var(--card-bg) !important;
+    border: 1px solid var(--border-color);
+}
+
+.impact-section .stat-box {
+    background-color: var(--bg-secondary) !important;
+}
+
+.impact-section .stat-box .fw-bold {
+    color: var(--text-primary);
+}
+
+body[data-theme="dark"] .impact-section .impact-card {
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* ========== Pricing Section ========== */
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.card-header {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+.card-body {
+    color: var(--text-primary);
+}
+
+.card .text-muted {
+    color: var(--text-muted) !important;
+}
+
+body[data-theme="dark"] .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.table {
+    color: var(--text-primary);
+}
+
+body[data-theme="dark"] .table {
+    --bs-table-bg: var(--bg-secondary);
+    --bs-table-border-color: var(--border-color);
+}
+
+/* ========== CTA Section ========== */
 .cta-section {
     background: linear-gradient(135deg, var(--eco-primary), var(--eco-dark));
     color: white;
@@ -246,7 +433,7 @@ body {
     position: relative;
 }
 
-/* Footer */
+/* ========== Footer ========== */
 .footer {
     background: var(--eco-bg-dark);
     color: white;
@@ -263,7 +450,7 @@ body {
     color: white;
 }
 
-/* Responsive */
+/* ========== Responsive Design ========== */
 @media (max-width: 768px) {
     .hero-title {
         font-size: 2.5rem;

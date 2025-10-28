@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" data-bs-theme="auto">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
 </head>
-<body>
+<body data-theme="light">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top">
         <div class="container">
@@ -23,7 +23,12 @@
                     <li class="nav-item"><a class="nav-link" href="#features">Características</a></li>
                     <li class="nav-item"><a class="nav-link" href="#challenges">Desafíos</a></li>
                     <li class="nav-item"><a class="nav-link" href="#impact">Impacto</a></li>
-                    <li class="nav-item"><a class="nav-link btn btn-success text-white px-4 ms-3" href="#download">Descargar</a></li>
+                    <li class="nav-item">
+                        <button id="themeToggle" class="btn btn-outline-secondary rounded-pill px-3 ms-3" aria-label="Cambiar tema">
+                            <span id="themeIcon">🌙</span>
+                        </button>
+                    </li>
+                    <li class="nav-item"><a class="nav-link btn btn-success text-white px-4 ms-2" href="#download">Descargar</a></li>
                 </ul>
             </div>
         </div>
@@ -219,7 +224,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-6">
-                    <div class="p-5 bg-white rounded-4 shadow-lg">
+                    <div class="p-5 bg-white rounded-4 shadow-lg impact-card">
                         <div class="text-center mb-4">
                             <div class="display-1 mb-3">🌱</div>
                             <h3 class="fw-bold text-success">Nivel 1</h3>
@@ -230,21 +235,21 @@
                         </div>
                         <div class="row text-center">
                             <div class="col-4">
-                                <div class="p-3 bg-light rounded">
+                                <div class="p-3 bg-light rounded stat-box">
                                     <div class="fs-3">🏆</div>
                                     <div class="fw-bold fs-4">0</div>
                                     <small class="text-muted">Puntos</small>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="p-3 bg-light rounded">
+                                <div class="p-3 bg-light rounded stat-box">
                                     <div class="fs-3">🌍</div>
                                     <div class="fw-bold fs-4">0.0</div>
                                     <small class="text-muted">kg CO₂</small>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <div class="p-3 bg-light rounded">
+                                <div class="p-3 bg-light rounded stat-box">
                                     <div class="fs-3">♻️</div>
                                     <div class="fw-bold fs-4">0.0</div>
                                     <small class="text-muted">kg Residuos</small>
@@ -257,7 +262,7 @@
         </div>
     </section>
 
-  <!-- Seccion de precios -->
+    <!-- Seccion de precios -->
     <section id="pricing" class="py-5 my-5">
         <div class="container">
             <div class="pricing-header text-center mb-5">
@@ -399,6 +404,7 @@
             </div>
         </div>
     </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -413,9 +419,9 @@
                 <div class="col-lg-2 col-md-4 mb-4">
                     <h6 class="fw-bold mb-3">Producto</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">Características</a></li>
-                        <li class="mb-2"><a href="#">Desafíos</a></li>
-                        <li class="mb-2"><a href="#">Precios</a></li>
+                        <li class="mb-2"><a href="#features">Características</a></li>
+                        <li class="mb-2"><a href="#challenges">Desafíos</a></li>
+                        <li class="mb-2"><a href="#pricing">Precios</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-2 col-md-4 mb-4">
@@ -451,5 +457,42 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Theme Switcher for EcoFootPrint
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+            
+            // Check for saved theme preference or default to 'light'
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            body.setAttribute('data-theme', currentTheme);
+            updateThemeIcon(currentTheme);
+            
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+                
+                // Add animation class
+                body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+            });
+            
+            // Update theme icon
+        function updateThemeIcon(theme) {
+          if (theme === 'dark') {
+        themeIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8"/></svg>';
+        themeToggle.setAttribute('aria-label', 'Cambiar a tema claro');
+         } else {
+        themeIcon.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 0 8 1zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"/></svg>';
+        themeToggle.setAttribute('aria-label', 'Cambiar a tema oscuro');
+            }
+         }
+        });
+    </script>
 </body>
 </html>
